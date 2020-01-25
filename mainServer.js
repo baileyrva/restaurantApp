@@ -23,6 +23,21 @@ app.get("/waitlist", function(req, res) {
   res.sendFile(path.join(__dirname, "waitlist.html"));
 }); 
 
+app.post("/booking", function(req, res) {
+  // req.body hosts is equal to the JSON post sent from the user
+  // This works because of our body parsing middleware
+  let newReservation = req.body;
+
+  // Using a RegEx Pattern to remove spaces from newCharacter
+  // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+  newReservation.routeName = newReservation.name.replace(/\s+/g, "").toLowerCase();
+
+  console.log(newReservation);
+
+  newReservation.push(reservationBest);
+
+  res.json(newReservation);
+});
 
 
 //Data parsing 
